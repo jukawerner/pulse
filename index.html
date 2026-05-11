@@ -21,11 +21,10 @@
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
   .brand-mark {
     width: 34px; height: 34px;
-    background: var(--grad-pulse);
     border-radius: var(--radius-sm);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display); font-weight: 800; font-size: 17px;
-    color: white; letter-spacing: -0.02em; flex-shrink: 0;
+    flex-shrink: 0;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(200,16,46,0.25);
   }
   .brand-name {
     font-family: var(--font-display); font-weight: 800;
@@ -179,7 +178,7 @@
 <!-- ════════════════════════════════ HEADER ════════════════════════════════ -->
 <header class="header">
   <a class="brand" href="#">
-    <div class="brand-mark">P</div>
+    <img class="brand-mark" src="assets/pulse-logo-mark.png" alt="Pulse"/>
     <span class="brand-name">Pulse</span>
   </a>
   <div class="header-pills">
@@ -202,7 +201,7 @@
   <section class="section">
     <div class="section-header">
       <span class="section-title">Brand Identity</span>
-      <span class="section-count">2 documentos</span>
+      <span class="section-count">1 documento</span>
     </div>
     <div class="grid-2">
 
@@ -214,16 +213,6 @@
         <h3 class="card-title">Brand Book</h3>
         <p class="card-desc">Documentação completa da identidade visual — logo, paleta, tipografia, voz e princípios de design.</p>
         <div class="card-cta card-cta-red">Abrir Brand Book <i data-lucide="arrow-right" width="14" height="14"></i></div>
-      </a>
-
-      <a href="brand-book-deck.html" class="card card-large">
-        <div class="ci ci-navy">
-          <i data-lucide="presentation" width="20" height="20"></i>
-        </div>
-        <p class="card-eyebrow">Apresentação</p>
-        <h3 class="card-title">Brand Deck</h3>
-        <p class="card-desc">Versão deck interativo do brand book, formatado para apresentações e alinhamentos de equipe.</p>
-        <div class="card-cta card-cta-navy">Abrir Deck <i data-lucide="arrow-right" width="14" height="14"></i></div>
       </a>
 
     </div>
