@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 32px 24px; background: var(--bg-app); display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; place-items: center; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .shape {
+    width: 88px; height: 76px;
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+  }
+  .name { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--fg-default); }
+  .desc { font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); }
+</style></head>
+<body>
+  <div class="item"><div class="shape" style="box-shadow: var(--shadow-xs)"></div><span class="name">xs</span><span class="desc">inputs / pills</span></div>
+  <div class="item"><div class="shape" style="box-shadow: var(--shadow-sm)"></div><span class="name">sm</span><span class="desc">cards default</span></div>
+  <div class="item"><div class="shape" style="box-shadow: var(--shadow-md)"></div><span class="name">md</span><span class="desc">popovers</span></div>
+  <div class="item"><div class="shape" style="box-shadow: var(--shadow-lg)"></div><span class="name">lg</span><span class="desc">dropdowns</span></div>
+  <div class="item"><div class="shape" style="box-shadow: var(--shadow-xl)"></div><span class="name">xl</span><span class="desc">modals</span></div>
+</body></html>

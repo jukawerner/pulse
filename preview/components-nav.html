@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); display: flex; flex-direction: column; gap: 16px; }
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border-subtle); }
+  .tab { padding: 10px 16px; font-size: 13px; font-weight: 600; color: var(--fg-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tab.active { color: var(--brand-primary); border-bottom-color: var(--brand-primary); }
+  .seg { display: inline-flex; padding: 3px; background: var(--bg-surface-2); border-radius: var(--radius-md); }
+  .seg button { padding: 6px 14px; border: none; background: transparent; font-size: 12px; font-weight: 600; color: var(--fg-muted); border-radius: 7px; cursor: pointer; font-family: inherit; }
+  .seg button.active { background: var(--bg-surface); color: var(--fg-default); box-shadow: var(--shadow-xs); }
+  .toggle { width: 36px; height: 20px; border-radius: 999px; background: var(--bg-surface-3); position: relative; cursor: pointer; transition: all 0.2s; }
+  .toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: white; box-shadow: var(--shadow-sm); transition: all 0.2s; }
+  .toggle.on { background: var(--brand-primary); }
+  .toggle.on::after { left: 18px; }
+  .row { display: flex; gap: 16px; align-items: center; }
+  .label { font-size: 13px; color: var(--fg-default); }
+</style></head>
+<body>
+  <div class="tabs">
+    <span class="tab active">Visão geral</span>
+    <span class="tab">Lojas</span>
+    <span class="tab">Atividades</span>
+    <span class="tab">Estoque</span>
+    <span class="tab">Relatórios</span>
+  </div>
+  <div class="row">
+    <div class="seg">
+      <button class="active">Dia</button>
+      <button>Semana</button>
+      <button>Mês</button>
+    </div>
+    <div class="row" style="gap: 8px;"><div class="toggle on"></div><span class="label">Sincronização automática</span></div>
+    <div class="row" style="gap: 8px;"><div class="toggle"></div><span class="label">Modo escuro</span></div>
+  </div>
+</body></html>

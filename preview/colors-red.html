@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 28px 24px; background: var(--bg-app); }
+  .scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .sw { height: 78px; display: flex; flex-direction: column; justify-content: flex-end; padding: 8px; }
+  .num { font-family: var(--font-mono); font-size: 10px; font-weight: 500; opacity: 0.85; }
+  .hex { font-family: var(--font-mono); font-size: 10px; font-weight: 500; opacity: 0.7; }
+  .label { display:flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .label .name { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+  .label .desc { font-family: var(--font-sans); font-size: 12px; color: var(--fg-muted); }
+</style></head>
+<body>
+  <div class="label"><span class="name">Pulse Red</span><span class="desc">Action · CTA · Live · Urgency</span></div>
+  <div class="scale">
+    <div class="sw" style="background:#FFF1F2; color:#54101A"><span class="num">50</span><span class="hex">FFF1F2</span></div>
+    <div class="sw" style="background:#FFE0E2; color:#54101A"><span class="num">100</span><span class="hex">FFE0E2</span></div>
+    <div class="sw" style="background:#FFC2C7; color:#54101A"><span class="num">200</span><span class="hex">FFC2C7</span></div>
+    <div class="sw" style="background:#FF939B; color:#54101A"><span class="num">300</span><span class="hex">FF939B</span></div>
+    <div class="sw" style="background:#F75A66; color:#fff"><span class="num">400</span><span class="hex">F75A66</span></div>
+    <div class="sw" style="background:#E63946; color:#fff"><span class="num">500</span><span class="hex">E63946</span></div>
+    <div class="sw" style="background:#C8102E; color:#fff"><span class="num">600 ★</span><span class="hex">C8102E</span></div>
+    <div class="sw" style="background:#9F1424; color:#fff"><span class="num">700</span><span class="hex">9F1424</span></div>
+    <div class="sw" style="background:#7A1220; color:#fff"><span class="num">800</span><span class="hex">7A1220</span></div>
+    <div class="sw" style="background:#54101A; color:#fff"><span class="num">900</span><span class="hex">54101A</span></div>
+  </div>
+</body></html>

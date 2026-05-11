@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .chip { padding: 14px; border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 6px; min-height: 92px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .name { font-family: var(--font-display); font-weight: 700; font-size: 13px; }
+  .hex { font-family: var(--font-mono); font-size: 10px; opacity: 0.75; }
+  .ex { font-size: 11px; margin-top: auto; }
+</style></head>
+<body>
+  <div class="grid">
+    <div class="chip" style="background:#D8F5E5; color:#0A6940;">
+      <div style="display:flex; align-items:center; gap:6px;"><span class="dot" style="background:#0E8A55"></span><span class="name">Success</span></div>
+      <div class="hex">#0E8A55 · #D8F5E5</div>
+      <div class="ex">Estoque OK · Sincronizado</div>
+    </div>
+    <div class="chip" style="background:#FEF1CD; color:#B45309;">
+      <div style="display:flex; align-items:center; gap:6px;"><span class="dot" style="background:#D97706"></span><span class="name">Warning</span></div>
+      <div class="hex">#D97706 · #FEF1CD</div>
+      <div class="ex">Estoque baixo · Pendente</div>
+    </div>
+    <div class="chip" style="background:#FFE0E2; color:#9F1424;">
+      <div style="display:flex; align-items:center; gap:6px;"><span class="dot" style="background:#C8102E"></span><span class="name">Danger</span></div>
+      <div class="hex">#C8102E · #FFE0E2</div>
+      <div class="ex">Ruptura · Erro</div>
+    </div>
+    <div class="chip" style="background:#DBE9FF; color:#114BA8;">
+      <div style="display:flex; align-items:center; gap:6px;"><span class="dot" style="background:#1865D8"></span><span class="name">Info</span></div>
+      <div class="hex">#1865D8 · #DBE9FF</div>
+      <div class="ex">Em rota · Aviso</div>
+    </div>
+  </div>
+</body></html>

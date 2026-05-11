@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>Pulse · Brand Book</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="deck-stage.js"></script>
+<style>
+  body { margin: 0; background: #0b1426; }
+  deck-stage { --slide-w: 1920px; --slide-h: 1080px; }
+  section {
+    width: 1920px; height: 1080px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-app);
+    color: var(--fg-default);
+    padding: 96px 120px;
+    display: flex; flex-direction: column;
+  }
+  .pad-l { padding: 80px 120px; }
+  .pn { position: absolute; top: 56px; right: 56px; font-family: var(--font-mono); font-size: 16px; color: var(--fg-subtle); letter-spacing: 0.18em; font-weight: 600; }
+  .eyebrow { font-family: var(--font-mono); font-size: 18px; color: var(--brand-primary); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+  .h1 { font-family: var(--font-display); font-weight: 800; font-size: 124px; line-height: 0.92; letter-spacing: -0.04em; margin: 24px 0; }
+  .h2 { font-family: var(--font-display); font-weight: 700; font-size: 88px; line-height: 0.98; letter-spacing: -0.03em; margin: 24px 0 32px; }
+  .h3 { font-family: var(--font-display); font-weight: 700; font-size: 36px; letter-spacing: -0.015em; margin: 0 0 16px; }
+  .lead { font-size: 28px; line-height: 1.5; color: var(--fg-muted); max-width: 1100px; }
+  .body { font-size: 22px; line-height: 1.55; color: var(--fg-default); }
+  .meta-mono { font-family: var(--font-mono); font-size: 16px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-muted); font-weight: 600; }
+
+  /* COVER */
+  .cover { background: var(--navy-900); color: white; padding: 80px 120px; justify-content: space-between; }
+  .cover .pn { color: rgba(255,255,255,0.4); }
+  .cover-top { display: flex; align-items: center; gap: 20px; }
+  .cover-top img { width: 56px; height: 56px; }
+  .cover-top .word { font-family: var(--font-display); font-weight: 800; font-size: 32px; letter-spacing: -0.03em; color: white; }
+  .cover-title { font-family: var(--font-display); font-weight: 800; font-size: 280px; line-height: 0.86; letter-spacing: -0.05em; color: white; margin: 0; }
+  .cover-title .red { background: linear-gradient(135deg, #E63946, #C8102E); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cover-meta-row { display: flex; justify-content: space-between; align-items: flex-end; }
+  .cover-meta-row .b { display: block; font-family: var(--font-display); font-size: 28px; font-weight: 700; color: white; letter-spacing: -0.01em; text-transform: none; margin-top: 6px; }
+  .cover-pulse { position: absolute; left: -5%; right: -5%; top: 56%; height: 180px; opacity: 0.1; }
+
+  /* TOC */
+  .toc { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; counter-reset: t; }
+  .toc li { counter-increment: t; display: grid; grid-template-columns: 80px 1fr; padding: 24px 0; border-bottom: 1px solid var(--border-subtle); gap: 24px; align-items: center; }
+  .toc li::before { content: counter(t, decimal-leading-zero); font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700; font-size: 22px; letter-spacing: 0.08em; }
+  .toc-name { font-family: var(--font-display); font-weight: 700; font-size: 32px; letter-spacing: -0.015em; }
+  .toc-desc { font-size: 16px; color: var(--fg-muted); margin-top: 4px; }
+
+  /* ESSENCE */
+  .essence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; flex: 1; margin-top: 16px; }
+  .ess-card { padding: 48px; border-radius: var(--radius-xl); background: var(--bg-surface); border: 1px solid var(--border-subtle); display: flex; flex-direction: column; }
+  .ess-card.dark { background: var(--navy-900); color: white; border: none; }
+  .ess-card .tag { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--brand-primary); margin-bottom: 20px; }
+  .ess-card.dark .tag { color: var(--red-400); }
+  .ess-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 34px; letter-spacing: -0.015em; margin: 0 0 16px; line-height: 1.15; }
+  .ess-card p { font-size: 20px; line-height: 1.55; margin: 0; color: var(--fg-muted); }
+  .ess-card.dark p { color: rgba(255,255,255,0.85); }
+
+  /* MANIFESTO */
+  .manifesto-slide { background: var(--grad-pulse); color: white; justify-content: center; align-items: center; padding: 120px; text-align: center; }
+  .manifesto-slide .eyebrow { color: rgba(255,255,255,0.7); }
+  .manifesto-slide .big { font-family: var(--font-display); font-size: 132px; font-weight: 800; line-height: 0.96; letter-spacing: -0.04em; margin: 32px 0; max-width: 1500px; }
+  .manifesto-slide .sub { font-family: var(--font-display); font-size: 38px; font-weight: 500; line-height: 1.3; opacity: 0.92; max-width: 1300px; margin: 0; }
+  .manifesto-slide .wave { position: absolute; left: 0; right: 0; bottom: 0; opacity: 0.18; }
+
+  /* LOGO */
+  .logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; flex: 1; margin-top: 16px; }
+  .logo-tile { border-radius: var(--radius-xl); display: grid; place-items: center; position: relative; padding: 48px; }
+  .logo-tile img { max-width: 60%; max-height: 60%; object-fit: contain; }
+  .logo-tile .lbl { position: absolute; top: 24px; left: 24px; font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+  .lt-light { background: var(--slate-0); border: 1px solid var(--border-subtle); } .lt-light .lbl { color: var(--fg-subtle); }
+  .lt-soft { background: var(--slate-100); } .lt-soft .lbl { color: var(--fg-muted); }
+  .lt-navy { background: var(--navy-900); } .lt-navy .lbl { color: rgba(255,255,255,0.55); }
+  .lt-red { background: var(--red-600); } .lt-red .lbl { color: rgba(255,255,255,0.75); }
+  .lt-grad { background: var(--grad-pulse); } .lt-grad .lbl { color: rgba(255,255,255,0.75); }
+
+  /* CLEAR + DO/DONT */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; flex: 1; margin-top: 16px; }
+  .cs-visual { background: var(--slate-100); border: 3px dashed var(--brand-primary); border-radius: var(--radius-lg); display: grid; place-items: center; position: relative; aspect-ratio: 1.3; }
+  .cs-visual img { width: 38%; }
+  .cs-mark { position: absolute; font-family: var(--font-mono); color: var(--brand-primary); font-size: 16px; font-weight: 700; }
+  .dd { padding: 32px; border-radius: var(--radius-lg); display: flex; flex-direction: column; gap: 20px; }
+  .dd.do { background: var(--status-success-soft); border: 1px solid var(--status-success); }
+  .dd.dont { background: var(--status-danger-soft); border: 1px solid var(--status-danger); }
+  .dd-h { font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+  .dd.do .dd-h { color: var(--status-success-fg); }
+  .dd.dont .dd-h { color: var(--status-danger-fg); }
+  .dd-stage { flex: 1; min-height: 120px; border-radius: 12px; display: grid; place-items: center; padding: 24px; }
+  .dd-cap { font-size: 16px; color: var(--fg-muted); line-height: 1.45; }
+
+  /* COLOR */
+  .color-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; margin-top: 16px; }
+  .color-block { border-radius: var(--radius-xl); padding: 56px; color: white; display: flex; flex-direction: column; justify-content: space-between; }
+  .color-block .name { font-family: var(--font-display); font-weight: 800; font-size: 64px; letter-spacing: -0.03em; line-height: 1; }
+  .color-block .vals { font-family: var(--font-mono); font-size: 18px; line-height: 1.9; opacity: 0.9; }
+  .cb-red { background: var(--red-600); }
+  .cb-navy { background: var(--navy-700); }
+  .scale-strip { display: grid; grid-template-columns: repeat(10, 1fr); gap: 0; border-radius: 12px; overflow: hidden; height: 80px; margin-top: 20px; }
+  .scale-strip > div { display: flex; align-items: flex-end; padding: 8px; font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.85); font-weight: 600; }
+  .status-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; flex: 1; }
+  .status-card { padding: 40px; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; }
+  .status-card .nm { font-family: var(--font-display); font-weight: 700; font-size: 38px; letter-spacing: -0.02em; }
+  .status-card .vals { font-family: var(--font-mono); font-size: 14px; opacity: 0.8; margin-top: 12px; line-height: 1.7; }
+  .status-card .use { font-size: 18px; margin-top: 16px; line-height: 1.4; }
+
+  /* TYPE */
+  .type-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; padding: 32px 48px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); flex: 1; }
+  .type-glyph { font-family: var(--font-display); font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.05em; }
+  .type-glyph.body { font-family: var(--font-sans); }
+  .type-glyph.mono { font-family: var(--font-mono); font-weight: 500; }
+  .type-spec dt { font-family: var(--font-mono); font-size: 14px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--fg-muted); margin-top: 14px; font-weight: 600; }
+  .type-spec dt:first-of-type { margin-top: 0; }
+  .type-spec dd { margin: 4px 0 0; font-family: var(--font-display); font-weight: 700; font-size: 24px; }
+  .type-stack { display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 20px; flex: 1; margin-top: 16px; }
+
+  /* VOICE */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; flex: 1; margin-top: 16px; }
+  .voice-card { padding: 48px; border-radius: var(--radius-lg); display: flex; flex-direction: column; gap: 24px; }
+  .voice-card.do { background: var(--bg-surface); border: 1px solid var(--border-subtle); }
+  .voice-card.dont { background: var(--bg-surface-2); border: 1px dashed var(--border-default); }
+  .voice-h { font-family: var(--font-mono); font-size: 14px; text-transform: uppercase; letter-spacing: 0.16em; font-weight: 700; }
+  .voice-card.do .voice-h { color: var(--status-success); }
+  .voice-card.dont .voice-h { color: var(--status-danger); }
+  .voice-card p { font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1.3; letter-spacing: -0.015em; margin: 0; }
+  .voice-card.dont p { color: var(--fg-muted); text-decoration: line-through; text-decoration-color: var(--status-danger); text-decoration-thickness: 1px; }
+
+  /* APPS */
+  .apps-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; flex: 1; margin-top: 16px; }
+  .app-frame { border-radius: var(--radius-xl); background: var(--bg-surface); border: 1px solid var(--border-subtle); overflow: hidden; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; }
+  .app-frame.email { background: var(--grad-pulse); color: white; border: none; padding: 48px; justify-content: center; }
+  .app-frame.deck-cover { background: var(--navy-900); color: white; border: none; padding: 48px; justify-content: center; position: relative; overflow: hidden; }
+  .right-col { display: grid; grid-template-rows: 1fr 1fr; gap: 32px; }
+  .app-head { padding: 18px 24px; border-bottom: 1px solid var(--border-subtle); display: flex; gap: 10px; align-items: center; font-family: var(--font-mono); font-size: 14px; color: var(--fg-muted); }
+  .app-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--slate-300); }
+  .app-body { padding: 32px; flex: 1; }
+
+  /* CLOSING */
+  .closing { background: var(--navy-900); color: white; padding: 96px 120px; justify-content: space-between; }
+  .closing .eyebrow { color: var(--red-400); }
+  .closing .h1 { color: white; font-size: 184px; }
+  .closing .lead { color: rgba(255,255,255,0.7); max-width: 1100px; font-size: 26px; }
+  .closing-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; font-family: var(--font-mono); font-size: 16px; color: rgba(255,255,255,0.6); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+  .closing-meta b { display: block; font-family: var(--font-display); font-size: 24px; color: white; text-transform: none; letter-spacing: -0.01em; margin-top: 8px; font-weight: 700; }
+  .closing-pulse { position: absolute; left: -8%; right: -8%; top: 50%; transform: translateY(-50%); opacity: 0.08; }
+
+  /* HIERARCHY DEMO */
+  .hier-demo { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 64px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .hier-demo .stats { display: flex; gap: 64px; margin-top: 40px; }
+  .hier-demo .stat b { font-family: var(--font-display); font-size: 56px; font-weight: 700; letter-spacing: -0.025em; display: block; }
+  .hier-demo .stat span { color: var(--fg-muted); font-size: 18px; }
+
+  /* TAGLINE inside manifesto */
+  .tagline-block { text-align: center; padding: 56px 0 24px; }
+  .tagline-block .small { font-family: var(--font-mono); font-size: 16px; letter-spacing: 0.22em; opacity: 0.7; font-weight: 700; text-transform: uppercase; }
+  .tagline-block .big { font-family: var(--font-display); font-weight: 800; font-size: 96px; letter-spacing: -0.035em; line-height: 1.0; margin: 16px 0 0; }
+</style></head>
+<body data-theme="light">
+
+<deck-stage>
+
+<!-- 01 COVER -->
+<section class="cover" data-screen-label="01 Cover">
+  <div class="pn">001 / 012</div>
+  <div class="cover-top">
+    <img src="assets/pulse-symbol.png" alt="">
+    <span class="word">PULSE</span>
+  </div>
+  <div>
+    <div class="meta-mono" style="color: rgba(255,255,255,0.6); margin-bottom: 32px;">Brand Book · v 1.0 · maio 2026</div>
+    <h1 class="cover-title">Brand<br/><span class="red">Book.</span></h1>
+  </div>
+  <div class="cover-meta-row">
+    <div class="meta-mono" style="color: rgba(255,255,255,0.55);">A realidade<span class="b">da operação.</span></div>
+    <div class="meta-mono" style="color: rgba(255,255,255,0.55); text-align: right;">Trade marketing<span class="b">operations platform</span></div>
+  </div>
+  <svg class="cover-pulse" viewBox="0 0 1920 180" preserveAspectRatio="none">
+    <path d="M0 90 L420 90 L470 18 L520 162 L570 6 L620 174 L680 54 L800 90 L1920 90" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>
+</section>
+
+<!-- 02 TOC -->
+<section data-screen-label="02 Índice">
+  <div class="pn">002 / 012</div>
+  <div class="eyebrow">Índice</div>
+  <h2 class="h2">O que você vai<br/>encontrar aqui.</h2>
+  <p class="lead" style="margin-bottom: 48px;">Este documento define quem é a Pulse, como ela se apresenta visualmente e como fala com o mundo. Use como referência viva — não como decoração.</p>
+  <ol class="toc">
+    <li><div><div class="toc-name">Essência</div><div class="toc-desc">Missão, posicionamento, personalidade</div></div></li>
+    <li><div><div class="toc-name">Manifesto</div><div class="toc-desc">O que defendemos. Em voz alta.</div></div></li>
+    <li><div><div class="toc-name">Logo</div><div class="toc-desc">Símbolo, wordmark, variações</div></div></li>
+    <li><div><div class="toc-name">Uso correto</div><div class="toc-desc">Área de respiro · do/don't</div></div></li>
+    <li><div><div class="toc-name">Cor</div><div class="toc-desc">Paleta primária + escalas</div></div></li>
+    <li><div><div class="toc-name">Tipografia</div><div class="toc-desc">Três famílias, hierarquia</div></div></li>
+    <li><div><div class="toc-name">Voz &amp; tom</div><div class="toc-desc">Como a Pulse fala</div></div></li>
+    <li><div><div class="toc-name">Aplicações</div><div class="toc-desc">Produto, e-mail, slides</div></div></li>
+  </ol>
+</section>
+
+<!-- 03 ESSÊNCIA -->
+<section data-screen-label="03 Essência">
+  <div class="pn">003 / 012</div>
+  <div class="eyebrow">01 · Essência</div>
+  <h2 class="h2">Quem é a Pulse?</h2>
+  <div class="essence-grid">
+    <div class="ess-card">
+      <div class="tag">Missão</div>
+      <h3>Mostrar a realidade da operação.</h3>
+      <p>Sem invenção, sem planilha desatualizada, sem "achismo de gerente". O que está acontecendo no PDV, agora — e o próximo passo pra fazer melhor.</p>
+    </div>
+    <div class="ess-card dark">
+      <div class="tag">Posicionamento</div>
+      <h3>A primeira plataforma feita pra quem está no chão.</h3>
+      <p>Não é mais um ERP enfeitado. É construída do promotor pra cima — com a urgência, a linguagem e o ritmo de quem trabalha em loja todo dia.</p>
+    </div>
+    <div class="ess-card">
+      <div class="tag">Público</div>
+      <h3>Times de trade que cansaram de WhatsApp e planilha.</h3>
+      <p>Indústrias FMCG, agências de trade, distribuidoras. Operações de 50 a 5000 promotores. Quem sabe que a próxima vantagem está na execução.</p>
+    </div>
+    <div class="ess-card">
+      <div class="tag">Personalidade</div>
+      <h3>Direta, próxima, rápida.</h3>
+      <p>Falamos "olá", não "prezado(a)". Mostramos o número antes do parágrafo. Resolvemos antes de explicar. Sem firula, sem corporativês.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 MANIFESTO -->
+<section class="manifesto-slide" data-screen-label="04 Manifesto">
+  <div class="pn" style="color: rgba(255,255,255,0.55);">004 / 012</div>
+  <div class="eyebrow" style="color: rgba(255,255,255,0.7);">02 · Manifesto</div>
+  <p class="big">A operação não acontece<br/>em PowerPoint.</p>
+  <p class="sub">Acontece às 6h da manhã, no estacionamento de um Carrefour. No terceiro corredor do Atacadão, com celular sem sinal. Pulse existe pra fazer essas duas pontas — chão e gestão — baterem juntas. <b>No mesmo ritmo.</b></p>
+  <svg class="wave" viewBox="0 0 1920 200" preserveAspectRatio="none" height="160">
+    <path d="M0 100 L420 100 L470 18 L520 182 L570 6 L620 194 L680 60 L800 100 L1920 100" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>
+</section>
+
+<!-- 05 LOGO -->
+<section data-screen-label="05 Logo">
+  <div class="pn">005 / 012</div>
+  <div class="eyebrow">03 · Logo</div>
+  <h2 class="h2" style="font-size: 64px;">O sinal de pulso<br/>num mundo redondo.</h2>
+  <p class="lead" style="margin-bottom: 32px;">Globo + onda de batimento cardíaco. Vermelho é a ação; navy é a estrutura. Seis variantes oficiais — não use nenhuma outra.</p>
+  <div class="logo-grid">
+    <div class="logo-tile lt-light"><span class="lbl">01 · Padrão</span><img src="assets/pulse-symbol.png" alt=""></div>
+    <div class="logo-tile lt-soft"><span class="lbl">02 · Soft bg</span><img src="assets/pulse-symbol.png" alt=""></div>
+    <div class="logo-tile lt-navy"><span class="lbl">03 · Sobre escuro</span><img src="assets/pulse-symbol.png" alt=""></div>
+    <div class="logo-tile lt-red"><span class="lbl">04 · Sobre vermelho</span><img src="assets/pulse-symbol.png" alt="" style="filter: brightness(0) invert(1);"></div>
+    <div class="logo-tile lt-grad"><span class="lbl">05 · Hero / gradient</span><img src="assets/pulse-symbol.png" alt="" style="filter: brightness(0) invert(1);"></div>
+    <div class="logo-tile lt-soft"><span class="lbl">06 · Lockup</span>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <img src="assets/pulse-symbol.png" alt="" style="width:80px; height:80px;">
+        <div>
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: 56px; letter-spacing: -0.03em; line-height: 1;">PULSE</div>
+          <div style="font-size: 14px; letter-spacing: 0.18em; color: var(--fg-muted); text-transform: uppercase; font-weight: 600; margin-top: 6px;">a realidade da operação</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 USO CORRETO -->
+<section data-screen-label="06 Uso correto">
+  <div class="pn">006 / 012</div>
+  <div class="eyebrow">04 · Uso correto</div>
+  <h2 class="h2" style="font-size: 64px;">Faça · Não faça.</h2>
+  <div class="two-col">
+    <div class="dd do">
+      <div class="dd-h">✓ FAÇA · use o lockup oficial</div>
+      <div class="dd-stage" style="background: white;">
+        <div style="display:flex; align-items:center; gap:18px;">
+          <img src="assets/pulse-symbol.png" style="width: 80px;">
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: 56px; letter-spacing: -0.03em;">PULSE</div>
+        </div>
+      </div>
+      <div class="dd-cap">Símbolo + wordmark Space Grotesk 800. Mesma altura, espaço fixo, alinhamento óptico.</div>
+    </div>
+    <div class="dd dont">
+      <div class="dd-h">✗ NÃO FAÇA · esticar, rotacionar, recolorir</div>
+      <div class="dd-stage" style="background: white;">
+        <img src="assets/pulse-symbol.png" style="width: 160px; transform: scaleX(1.6) rotate(-12deg); filter: hue-rotate(120deg);">
+      </div>
+      <div class="dd-cap">Sem distorção, sem rotação fora de 0°, sem trocar a cor do símbolo.</div>
+    </div>
+    <div class="dd do">
+      <div class="dd-h">✓ FAÇA · símbolo solo em ícones pequenos</div>
+      <div class="dd-stage" style="background: var(--navy-800);">
+        <img src="assets/pulse-symbol.png" style="width: 96px;">
+      </div>
+      <div class="dd-cap">Favicon, ícone de app, watermarks. Tamanho mínimo: 32px digital / 12mm impresso.</div>
+    </div>
+    <div class="dd dont">
+      <div class="dd-h">✗ NÃO FAÇA · refazer a wordmark em outra fonte</div>
+      <div class="dd-stage" style="background: white;">
+        <div style="font-family: Georgia, serif; font-weight: bold; font-size: 64px; color: var(--brand-primary);">PULSE</div>
+      </div>
+      <div class="dd-cap">Wordmark sempre em Space Grotesk 800, letter-spacing −0.03em. Sem exceção.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 COR PRIMÁRIA -->
+<section data-screen-label="07 Cor primária">
+  <div class="pn">007 / 012</div>
+  <div class="eyebrow">05 · Cor</div>
+  <h2 class="h2" style="font-size: 72px;">Vermelho é ação.<br/>Navy é estrutura.</h2>
+  <div class="color-spread">
+    <div class="color-block cb-red">
+      <div>
+        <div class="meta-mono" style="color: rgba(255,255,255,0.7);">Primária · ação</div>
+        <div class="name" style="margin-top: 12px; color: white;">Pulse Red</div>
+      </div>
+      <div>
+        <div class="vals">HEX · #C8102E<br/>RGB · 200 16 46<br/>CMYK · 12 100 85 3<br/>PANTONE · 186 C</div>
+        <div class="scale-strip">
+          <div style="background:#FFF1F2"></div><div style="background:#FFE0E2"></div>
+          <div style="background:#FFC2C7"></div><div style="background:#FF939B"></div>
+          <div style="background:#F75A66"></div><div style="background:#E63946"></div>
+          <div style="background:#C8102E; outline: 3px solid white; outline-offset: -6px;">★</div>
+          <div style="background:#9F1424"></div><div style="background:#7A1220"></div><div style="background:#54101A"></div>
+        </div>
+      </div>
+    </div>
+    <div class="color-block cb-navy">
+      <div>
+        <div class="meta-mono" style="color: rgba(255,255,255,0.7);">Primária · estrutura</div>
+        <div class="name" style="margin-top: 12px; color: white;">Pulse Navy</div>
+      </div>
+      <div>
+        <div class="vals">HEX · #1B2A4E<br/>RGB · 27 42 78<br/>CMYK · 88 75 30 23<br/>PANTONE · 2767 C</div>
+        <div class="scale-strip">
+          <div style="background:#F2F4F9; color:#0B1426"></div><div style="background:#E2E7F1; color:#0B1426"></div>
+          <div style="background:#C2CCDF; color:#0B1426"></div><div style="background:#94A3C2; color:#0B1426"></div>
+          <div style="background:#5E73A0"></div><div style="background:#3B5187"></div>
+          <div style="background:#243C6C"></div>
+          <div style="background:#1B2A4E; outline: 3px solid white; outline-offset: -6px;">★</div>
+          <div style="background:#131F3A"></div><div style="background:#0B1426"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 COR STATUS -->
+<section data-screen-label="08 Cor status">
+  <div class="pn">008 / 012</div>
+  <div class="eyebrow">05 · Cor · status</div>
+  <h2 class="h2" style="font-size: 64px;">Status — só pra feedback.</h2>
+  <p class="lead" style="margin-bottom: 40px;">Nunca como decoração de marca. Cada cor tem um significado fixo no produto.</p>
+  <div class="status-grid">
+    <div class="status-card" style="background:#D8F5E5; color:#0A6940;">
+      <div><div class="nm">Success</div><div class="vals">#0E8A55 · #D8F5E5</div></div>
+      <div class="use">Estoque OK<br/>Sincronizado<br/>Ponto batido</div>
+    </div>
+    <div class="status-card" style="background:#FEF1CD; color:#B45309;">
+      <div><div class="nm">Warning</div><div class="vals">#D97706 · #FEF1CD</div></div>
+      <div class="use">Estoque baixo<br/>Atenção<br/>Atrasado</div>
+    </div>
+    <div class="status-card" style="background:#FFE0E2; color:#9F1424;">
+      <div><div class="nm">Danger</div><div class="vals">#C8102E · #FFE0E2</div></div>
+      <div class="use">Ruptura<br/>Erro de sync<br/>Crítico</div>
+    </div>
+    <div class="status-card" style="background:#DBE9FF; color:#114BA8;">
+      <div><div class="nm">Info</div><div class="vals">#1865D8 · #DBE9FF</div></div>
+      <div class="use">Em rota<br/>Aviso<br/>Novo</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 TIPOGRAFIA -->
+<section data-screen-label="09 Tipografia">
+  <div class="pn">009 / 012</div>
+  <div class="eyebrow">06 · Tipografia</div>
+  <h2 class="h2" style="font-size: 64px;">Três famílias.<br/>Cada uma com função.</h2>
+  <div class="type-stack">
+    <div class="type-row">
+      <div class="type-glyph">Aa</div>
+      <dl class="type-spec">
+        <dt>Família</dt><dd>Space Grotesk</dd>
+        <dt>Função</dt><dd>Display · headlines · KPIs</dd>
+        <dt>Pesos · Tracking</dt><dd>500–800 · −0.02 a −0.04em</dd>
+      </dl>
+    </div>
+    <div class="type-row">
+      <div class="type-glyph body">Ag</div>
+      <dl class="type-spec">
+        <dt>Família</dt><dd>Manrope</dd>
+        <dt>Função</dt><dd>UI · body · texto corrido</dd>
+        <dt>Pesos · Tracking</dt><dd>400–800 · 0 (default)</dd>
+      </dl>
+    </div>
+    <div class="type-row">
+      <div class="type-glyph mono">07</div>
+      <dl class="type-spec">
+        <dt>Família</dt><dd>JetBrains Mono</dd>
+        <dt>Função</dt><dd>Dados tabulares · SKUs</dd>
+        <dt>Pesos · Tracking</dt><dd>400–500 · tabular-nums</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 10 VOZ E TOM -->
+<section data-screen-label="10 Voz e tom">
+  <div class="pn">010 / 012</div>
+  <div class="eyebrow">07 · Voz &amp; Tom</div>
+  <h2 class="h2" style="font-size: 64px;">Falamos com gente,<br/>não com cargo.</h2>
+  <div class="voice-grid">
+    <div class="voice-card do">
+      <div class="voice-h">✓ A gente fala assim</div>
+      <p>"Olá, Marina! Você tem 4 lojas pra visitar hoje."</p>
+      <p>"Bateu o ponto? Bora começar."</p>
+      <p>"Estoque abaixo do mínimo em 3 SKUs."</p>
+      <p>"Sem internet? Tranquilo — salvamos aqui."</p>
+    </div>
+    <div class="voice-card dont">
+      <div class="voice-h">✗ A gente não fala assim</div>
+      <p>"Bem-vindo(a) ao seu painel de operações."</p>
+      <p>"Confirme sua presença no estabelecimento."</p>
+      <p>"Foi detectada uma anomalia de inventário."</p>
+      <p>"Erro de conexão. Tente novamente."</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11 APLICAÇÕES -->
+<section data-screen-label="11 Aplicações">
+  <div class="pn">011 / 012</div>
+  <div class="eyebrow">08 · Aplicações</div>
+  <h2 class="h2" style="font-size: 64px;">A marca em ação.</h2>
+  <div class="apps-grid">
+    <div class="app-frame">
+      <div class="app-head"><div class="app-dot"></div><div class="app-dot"></div><div class="app-dot"></div><span style="margin-left: 16px;">app.pulse.com</span></div>
+      <div class="app-body" style="padding: 0; background: var(--bg-app); flex: 1;">
+        <div style="display: grid; grid-template-columns: 80px 1fr; height: 100%;">
+          <div style="background: var(--navy-900); display: flex; flex-direction: column; align-items: center; padding: 20px 0; gap: 16px;">
+            <img src="assets/pulse-symbol.png" style="width: 36px; filter: brightness(0) invert(1);">
+            <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--red-500); display: grid; place-items: center; color: white; font-size: 20px;">⌂</div>
+            <div style="width: 44px; height: 44px; border-radius: 10px; color: rgba(255,255,255,0.5); display: grid; place-items: center; font-size: 18px;">▦</div>
+          </div>
+          <div style="padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="display:flex; align-items: baseline; justify-content: space-between;"><div style="font-family: var(--font-display); font-weight: 700; font-size: 30px; letter-spacing: -0.02em;">Olá, Marina! 👋</div><div style="font-family: var(--font-mono); font-size: 14px; color: var(--fg-muted);">10 mai · 09:41</div></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+              <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px;"><div style="font-size: 13px; color: var(--fg-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.08em;">Sell-out</div><div style="font-family: var(--font-display); font-weight: 700; font-size: 32px; margin-top: 6px; letter-spacing: -0.02em;">248k</div></div>
+              <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px;"><div style="font-size: 13px; color: var(--fg-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.08em;">Aderência</div><div style="font-family: var(--font-display); font-weight: 700; font-size: 32px; margin-top: 6px; letter-spacing: -0.02em;">84%</div></div>
+              <div style="background: var(--grad-pulse); color: white; border-radius: 12px; padding: 20px;"><div style="font-size: 13px; opacity: 0.85; text-transform: uppercase; font-weight: 600; letter-spacing: 0.08em;">No ar</div><div style="font-family: var(--font-display); font-weight: 700; font-size: 32px; margin-top: 6px; letter-spacing: -0.02em;">23</div></div>
+            </div>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 24px; flex: 1;">
+              <div style="font-family: var(--font-display); font-weight: 700; font-size: 18px; margin-bottom: 12px;">Sell-out por categoria</div>
+              <svg width="100%" height="140" viewBox="0 0 600 140" fill="none" preserveAspectRatio="none">
+                <path d="M0 90 L80 75 L160 80 L240 40 L320 50 L400 22 L480 30 L600 14" stroke="#C8102E" stroke-width="3" fill="none"/>
+                <path d="M0 112 L80 100 L160 90 L240 92 L320 72 L400 76 L480 62 L600 54" stroke="#1B2A4E" stroke-width="3" fill="none"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <div class="app-frame email">
+        <div class="meta-mono" style="color: rgba(255,255,255,0.85);">E-mail · onboarding</div>
+        <p style="font-family: var(--font-display); font-weight: 700; font-size: 44px; letter-spacing: -0.02em; margin: 16px 0 12px; line-height: 1.05;">Bem-vinda à operação, Marina.</p>
+        <p style="font-size: 20px; opacity: 0.9; line-height: 1.5; margin: 0 0 24px;">Em 3 cliques você vê tudo que está rolando em suas 12 lojas.</p>
+        <div style="background: white; color: var(--brand-primary); padding: 16px 28px; border-radius: 12px; font-family: var(--font-sans); font-weight: 700; font-size: 18px; display: inline-block; align-self: flex-start;">Entrar no Pulse →</div>
+      </div>
+      <div class="app-frame deck-cover">
+        <div class="meta-mono" style="color: var(--red-400);">Slide deck · capa</div>
+        <p style="font-family: var(--font-display); font-weight: 800; font-size: 56px; letter-spacing: -0.03em; margin: 16px 0 8px; line-height: 1.0;">Q2 Operações<br/>em revisão.</p>
+        <p style="font-size: 18px; opacity: 0.7; margin: 0;">Apresentação trimestral · Pulse Analytics</p>
+        <svg style="position: absolute; right: -30px; bottom: -10px; opacity: 0.18;" width="360" height="100" viewBox="0 0 360 100" fill="none">
+          <path d="M0 50 L100 50 L120 14 L140 86 L160 4 L180 92 L200 30 L260 50 L360 50" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 CLOSING -->
+<section class="closing" data-screen-label="12 Encerramento">
+  <div class="pn" style="color: rgba(255,255,255,0.4);">012 / 012</div>
+  <div>
+    <div class="eyebrow">Encerramento</div>
+    <h1 class="h1">No mesmo<br/>ritmo.</h1>
+    <p class="lead">Este brand book é vivo. Quando bater dúvida, volta aqui. Quando achar que um caso não foi previsto, fala com o time de design — a gente atualiza junto.</p>
+  </div>
+  <div class="closing-meta">
+    <div>Versão<b>1.0 · maio 2026</b></div>
+    <div>Mantido por<b>Pulse Design</b></div>
+    <div>Próxima revisão<b>nov 2026</b></div>
+  </div>
+  <svg class="closing-pulse" viewBox="0 0 1920 200" preserveAspectRatio="none">
+    <path d="M0 100 L420 100 L470 18 L520 182 L570 6 L620 194 L680 60 L800 100 L1920 100" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>
+</section>
+
+</deck-stage>
+
+</body></html>

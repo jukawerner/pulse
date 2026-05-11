@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); display: flex; gap: 14px; }
+  .av { border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; color: white; position: relative; flex-shrink: 0; }
+  .a1 { width: 28px; height: 28px; font-size: 11px; background: #C8102E; }
+  .a2 { width: 36px; height: 36px; font-size: 13px; background: #1B2A4E; }
+  .a3 { width: 44px; height: 44px; font-size: 15px; background: #243C6C; }
+  .a4 { width: 56px; height: 56px; font-size: 18px; background: #C8102E; }
+  .status { position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--bg-app); }
+  .online { background: #16A66B; }
+  .away { background: #F59E0B; }
+  .stack { display: flex; align-items: center; }
+  .stack .av { margin-left: -8px; border: 2px solid var(--bg-app); }
+  .stack .av:first-child { margin-left: 0; }
+  .more {
+    background: var(--bg-surface-2); color: var(--fg-muted); font-size: 11px;
+    width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+    margin-left: -8px; border: 2px solid var(--bg-app);
+    font-family: var(--font-mono); font-weight: 600;
+  }
+  .group { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  .label { font-size: 10px; color: var(--fg-muted); font-family: var(--font-mono); }
+</style></head>
+<body>
+  <div class="group"><span class="av a1">M</span><span class="label">xs · 28</span></div>
+  <div class="group"><span class="av a2">JP<span class="status online"></span></span><span class="label">sm · 36</span></div>
+  <div class="group"><span class="av a3">AL<span class="status away"></span></span><span class="label">md · 44</span></div>
+  <div class="group"><span class="av a4">RC</span><span class="label">lg · 56</span></div>
+  <div class="group" style="flex: 1; align-items: flex-end;">
+    <div class="stack">
+      <span class="av a2" style="background:#C8102E">M</span>
+      <span class="av a2" style="background:#1B2A4E">JP</span>
+      <span class="av a2" style="background:#243C6C">AL</span>
+      <span class="av a2" style="background:#3B5187">RC</span>
+      <span class="more">+12</span>
+    </div>
+    <span class="label">grupo · time</span>
+  </div>
+</body></html>

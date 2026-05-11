@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); }
+  .row { display: flex; gap: 6px; height: 64px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .s { flex: 1; display: flex; align-items: flex-end; padding: 6px 8px; color: white; font-family: var(--font-mono); font-size: 10px; font-weight: 500; }
+  .label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .label .name { font-family: var(--font-display); font-weight: 700; font-size: 14px; }
+  .label .desc { font-family: var(--font-sans); font-size: 12px; color: var(--fg-muted); }
+  .legend { display: flex; gap: 14px; margin-top: 10px; font-size: 11px; color: var(--fg-muted); font-family: var(--font-mono); }
+</style></head>
+<body>
+  <div class="label"><span class="name">Chart palette</span><span class="desc">8 categóricas · acessíveis · em ordem de uso</span></div>
+  <div class="row">
+    <div class="s" style="background:#C8102E">1</div>
+    <div class="s" style="background:#1B2A4E">2</div>
+    <div class="s" style="background:#F59E0B">3</div>
+    <div class="s" style="background:#16A66B">4</div>
+    <div class="s" style="background:#2D7FF9">5</div>
+    <div class="s" style="background:#5E73A0">6</div>
+    <div class="s" style="background:#F75A66; color:#54101A">7</div>
+    <div class="s" style="background:#7B8497">8</div>
+  </div>
+  <div class="legend"><span>red 600</span><span>navy 700</span><span>amber 500</span><span>green 500</span><span>blue 500</span><span>navy 400</span><span>red 400</span><span>slate 500</span></div>
+</body></html>

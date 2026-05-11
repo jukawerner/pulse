@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>Pulse Mobile</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+<style>
+  body { background: #0B1426; min-height: 100vh; padding: 32px; display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; align-items: flex-start; }
+  .screen-wrap { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .screen-label { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: #ECEFF6; letter-spacing: 0.02em; }
+  .phone {
+    width: 380px; height: 780px;
+    background: var(--bg-app);
+    border-radius: 44px;
+    border: 10px solid #161A24;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 8px 20px rgba(0,0,0,0.35);
+    overflow: hidden;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  .notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 28px; background: #161A24; border-radius: 0 0 18px 18px; z-index: 20; }
+  .status { padding: 14px 24px 6px; font-size: 13px; font-weight: 600; color: var(--fg-default); display: flex; justify-content: space-between; align-items: center; height: 44px; }
+  .status .right { display: flex; gap: 4px; align-items: center; font-family: var(--font-mono); }
+
+  /* Screen content */
+  .scr { flex: 1; overflow-y: auto; padding: 8px 18px 18px; display: flex; flex-direction: column; gap: 14px; }
+  .scr::-webkit-scrollbar { display: none; }
+
+  /* Header */
+  .hdr { display: flex; align-items: center; gap: 12px; padding: 4px 2px; }
+  .av-lg { width: 44px; height: 44px; border-radius: 50%; background: var(--brand-primary); color: white; display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: 16px; flex-shrink: 0; position: relative; }
+  .av-lg::after { content:''; position:absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: var(--status-success); border-radius: 50%; border: 2px solid var(--bg-app); }
+  .hi { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .hi-sub { font-size: 12px; color: var(--fg-muted); }
+  .bell { margin-left: auto; width: 38px; height: 38px; border-radius: 12px; background: var(--bg-surface); display: grid; place-items: center; position: relative; color: var(--fg-default); }
+  .bell::after { content: ''; position: absolute; top: 9px; right: 9px; width: 8px; height: 8px; background: var(--brand-primary); border-radius: 50%; border: 2px solid var(--bg-surface); }
+  .bell svg { width: 18px; height: 18px; }
+
+  /* Hero card */
+  .hero {
+    background: var(--grad-pulse);
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85; }
+  .hero-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 4px 0 12px; line-height: 1.1; }
+  .hero-meta { display: flex; gap: 14px; font-size: 12px; opacity: 0.9; }
+  .hero-meta strong { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .hero-line { position: absolute; right: -16px; bottom: -10px; opacity: 0.25; }
+  .punch-btn {
+    margin-top: 16px; width: 100%;
+    background: white; color: var(--brand-primary);
+    padding: 13px; border-radius: 14px;
+    font-family: var(--font-sans); font-size: 15px; font-weight: 700;
+    border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  /* Section */
+  .sect-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 2px; }
+  .sect-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; }
+  .sect-link { font-size: 12px; color: var(--brand-primary); font-weight: 600; }
+
+  /* Visit list */
+  .visit { background: var(--bg-surface); border-radius: 14px; padding: 14px; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow-xs); }
+  .v-num { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--bg-surface-2); font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--fg-muted); flex-shrink: 0; }
+  .v-info { flex: 1; min-width: 0; }
+  .v-name { font-size: 14px; font-weight: 600; }
+  .v-meta { font-size: 11px; color: var(--fg-muted); font-family: var(--font-mono); margin-top: 2px; }
+  .v-time { font-size: 11px; font-family: var(--font-mono); padding: 4px 8px; border-radius: 8px; background: var(--bg-surface-2); color: var(--fg-default); font-weight: 600; }
+  .visit.active { background: var(--brand-primary); color: white; }
+  .visit.active .v-num { background: rgba(255,255,255,0.18); color: white; }
+  .visit.active .v-meta { color: rgba(255,255,255,0.8); }
+  .visit.active .v-time { background: rgba(255,255,255,0.22); color: white; }
+  .visit.done { opacity: 0.55; }
+  .visit.done .v-num { background: var(--status-success); color: white; }
+
+  /* Stats row */
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat { background: var(--bg-surface); border-radius: 12px; padding: 12px 14px; }
+  .stat-l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-muted); font-weight: 600; }
+  .stat-v { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; margin-top: 2px; }
+  .stat-d { font-size: 10px; color: var(--status-success); font-family: var(--font-mono); margin-top: 2px; }
+
+  /* Bottom nav */
+  .tabbar {
+    height: 72px;
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+    padding: 6px 6px 18px;
+  }
+  .tab-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: var(--fg-muted); font-size: 10px; font-weight: 600; cursor: pointer; }
+  .tab-item svg { width: 22px; height: 22px; }
+  .tab-item.active { color: var(--brand-primary); }
+  .fab { position: relative; }
+  .fab .fab-btn {
+    position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+    width: 54px; height: 54px; border-radius: 50%;
+    background: var(--grad-pulse); display: grid; place-items: center; color: white;
+    box-shadow: 0 8px 20px rgba(200,16,46,0.45);
+  }
+  .fab .fab-btn svg { width: 24px; height: 24px; }
+  .fab .label { margin-top: 30px; color: var(--fg-muted); }
+
+  /* === SCREEN 2: Estoque/scan === */
+  .scan-hero {
+    background: var(--navy-800); color: white;
+    border-radius: 20px; padding: 18px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .sku-row { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+  .sku-mono { font-family: var(--font-mono); font-size: 13px; background: rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 6px; }
+  .scan-frame {
+    margin-top: 14px;
+    height: 160px; border-radius: 12px;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0)),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 2px, transparent 2px 4px);
+    position: relative;
+    overflow: hidden;
+  }
+  .scan-corners { position: absolute; inset: 16px; border: 2px solid white; border-radius: 8px; opacity: 0.9; }
+  .scan-corners::before, .scan-corners::after { content: ''; position: absolute; left: -2px; right: -2px; height: 18px; }
+  .scan-line { position: absolute; left: 16px; right: 16px; height: 2px; background: var(--brand-primary); top: 50%; box-shadow: 0 0 14px var(--brand-primary); }
+
+  .count-card { background: var(--bg-surface); border-radius: 16px; padding: 18px; }
+  .count-h { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
+  .count-sub { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
+  .counter { display: flex; align-items: center; gap: 18px; margin-top: 16px; justify-content: center; }
+  .cbtn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-2); display: grid; place-items: center; color: var(--fg-default); font-size: 22px; font-weight: 600; cursor: pointer; border: none; font-family: inherit; }
+  .ccount { font-family: var(--font-display); font-weight: 700; font-size: 46px; letter-spacing: -0.025em; font-variant-numeric: tabular-nums; min-width: 80px; text-align: center; }
+  .save-btn {
+    margin-top: 18px; width: 100%;
+    background: var(--brand-primary); color: white;
+    padding: 14px; border-radius: 14px;
+    font-family: var(--font-sans); font-size: 15px; font-weight: 700;
+    border: none; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .prev-counts { display: flex; flex-direction: column; gap: 8px; }
+  .prev-c { display: flex; justify-content: space-between; padding: 10px 14px; background: var(--bg-surface); border-radius: 10px; align-items: center; }
+  .prev-name { font-size: 13px; font-weight: 600; }
+  .prev-meta { font-size: 11px; color: var(--fg-muted); font-family: var(--font-mono); }
+  .prev-v { font-family: var(--font-display); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+  .pulse-mini { font-size: 10px; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700; letter-spacing: 0.14em; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState } = React;
+
+function Icon({name, ...p}) {
+  React.useEffect(() => { window.lucide && window.lucide.createIcons(); });
+  return <i data-lucide={name} {...p}></i>;
+}
+
+function StatusBar() {
+  return (
+    <div className="status">
+      <span>9:41</span>
+      <div className="right">
+        <Icon name="signal" style={{width:14,height:14}}/>
+        <Icon name="wifi" style={{width:14,height:14}}/>
+        <Icon name="battery-full" style={{width:18,height:14}}/>
+      </div>
+    </div>
+  );
+}
+
+function HomeScreen() {
+  return (
+    <>
+      <div className="scr">
+        <div className="hdr">
+          <div className="av-lg">MR</div>
+          <div>
+            <div className="hi">Olá, Marina!</div>
+            <div className="hi-sub">Quinta · 10 mai · 9:41</div>
+          </div>
+          <div className="bell"><Icon name="bell"/></div>
+        </div>
+
+        <div className="hero">
+          <div className="hero-tag">Próxima loja · 12 min</div>
+          <div className="hero-title">Carrefour Pinheiros</div>
+          <div className="hero-meta">
+            <div><strong>R$ 48k</strong>sell-out 7d</div>
+            <div><strong>3</strong>SKUs · ruptura</div>
+            <div><strong>92%</strong>aderência</div>
+          </div>
+          <button className="punch-btn">
+            <Icon name="map-pin"/> Bater ponto
+          </button>
+          <svg className="hero-line" width="200" height="50" viewBox="0 0 200 50" fill="none">
+            <path d="M0 25 L40 25 L52 8 L64 42 L76 2 L88 48 L100 18 L120 25 L200 25" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div className="stats">
+          <div className="stat">
+            <div className="stat-l">Visitas hoje</div>
+            <div className="stat-v">4 <span style={{fontSize:13, color:'var(--fg-muted)'}}>/ 8</span></div>
+            <div className="stat-d">↑ no ritmo</div>
+          </div>
+          <div className="stat">
+            <div className="stat-l">Fotos enviadas</div>
+            <div className="stat-v">42</div>
+            <div className="stat-d">↑ 8 hoje</div>
+          </div>
+        </div>
+
+        <div className="sect-head">
+          <div className="sect-title">Rota de hoje</div>
+          <div className="sect-link">Ver mapa →</div>
+        </div>
+
+        <div style={{display:'flex',flexDirection:'column',gap:10}}>
+          <div className="visit done">
+            <div className="v-num"><Icon name="check" style={{width:14,height:14}}/></div>
+            <div className="v-info">
+              <div className="v-name">Pão de Açúcar V. Mariana</div>
+              <div className="v-meta">SP · finalizada · 1h 12min</div>
+            </div>
+            <div className="v-time">08:42</div>
+          </div>
+          <div className="visit active">
+            <div className="v-num">2</div>
+            <div className="v-info">
+              <div className="v-name">Carrefour Pinheiros</div>
+              <div className="v-meta">SP · próxima · 2.4 km</div>
+            </div>
+            <div className="v-time">10:00</div>
+          </div>
+          <div className="visit">
+            <div className="v-num">3</div>
+            <div className="v-info">
+              <div className="v-name">Atacadão Tatuapé</div>
+              <div className="v-meta">SP · agendada · 8.1 km</div>
+            </div>
+            <div className="v-time">14:00</div>
+          </div>
+          <div className="visit">
+            <div className="v-num">4</div>
+            <div className="v-info">
+              <div className="v-name">Extra Anhanguera</div>
+              <div className="v-meta">SP · agendada · 12.7 km</div>
+            </div>
+            <div className="v-time">16:30</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="tabbar">
+        <div className="tab-item active"><Icon name="home"/>Início</div>
+        <div className="tab-item"><Icon name="map"/>Rota</div>
+        <div className="tab-item fab"><div className="fab-btn"><Icon name="scan-line"/></div><span className="label">Escanear</span></div>
+        <div className="tab-item"><Icon name="camera"/>Fotos</div>
+        <div className="tab-item"><Icon name="user"/>Perfil</div>
+      </div>
+    </>
+  );
+}
+
+function ScanScreen() {
+  const [n, setN] = useState(24);
+  return (
+    <>
+      <div className="scr">
+        <div className="hdr">
+          <div className="bell" style={{background:'var(--bg-surface-2)'}}><Icon name="arrow-left"/></div>
+          <div>
+            <div className="hi" style={{fontSize:17}}>Contagem de estoque</div>
+            <div className="hi-sub">Carrefour Pinheiros · Gôndola 4</div>
+          </div>
+        </div>
+
+        <div className="scan-hero">
+          <div className="pulse-mini" style={{color:'#FF9BA3'}}>SKU IDENTIFICADO</div>
+          <div style={{fontFamily:'var(--font-display)',fontWeight:700,fontSize:20,letterSpacing:'-0.02em'}}>Coca-Cola Original 2L</div>
+          <div className="sku-row">
+            <span className="sku-mono">7894900011517</span>
+            <span style={{fontSize:11,opacity:0.7}}>· última: há 6 dias</span>
+          </div>
+          <div className="scan-frame">
+            <div className="scan-corners"></div>
+            <div className="scan-line"></div>
+          </div>
+        </div>
+
+        <div className="count-card">
+          <div className="count-h">Quantos você contou?</div>
+          <div className="count-sub">Mínimo do planograma: 18 un.</div>
+          <div className="counter">
+            <button className="cbtn" onClick={() => setN(Math.max(0, n-1))}>−</button>
+            <span className="ccount">{n}</span>
+            <button className="cbtn" onClick={() => setN(n+1)}>+</button>
+          </div>
+          <button className="save-btn"><Icon name="check"/> Salvar contagem</button>
+        </div>
+
+        <div className="sect-head"><div className="sect-title">Já contados nesta visita</div><div className="sect-link">3 SKUs</div></div>
+        <div className="prev-counts">
+          <div className="prev-c">
+            <div><div className="prev-name">Heineken 350ml lata</div><div className="prev-meta">SKU 7891991010924 · 12:14</div></div>
+            <div className="prev-v">36</div>
+          </div>
+          <div className="prev-c">
+            <div><div className="prev-name">Skol 269ml</div><div className="prev-meta">SKU 7891991017824 · 12:09</div></div>
+            <div className="prev-v" style={{color:'var(--status-warning)'}}>4</div>
+          </div>
+          <div className="prev-c">
+            <div><div className="prev-name">Brahma Duplo Malte</div><div className="prev-meta">SKU 7891149102204 · 12:02</div></div>
+            <div className="prev-v">28</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="tabbar">
+        <div className="tab-item"><Icon name="home"/>Início</div>
+        <div className="tab-item"><Icon name="map"/>Rota</div>
+        <div className="tab-item fab"><div className="fab-btn"><Icon name="scan-line"/></div><span className="label">Escanear</span></div>
+        <div className="tab-item"><Icon name="camera"/>Fotos</div>
+        <div className="tab-item"><Icon name="user"/>Perfil</div>
+      </div>
+    </>
+  );
+}
+
+function Phone({label, children, theme}) {
+  return (
+    <div className="screen-wrap">
+      <div className="screen-label">{label}</div>
+      <div className="phone" data-theme={theme}>
+        <div className="notch"></div>
+        <StatusBar/>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Phone label="01 · Home / Rota do dia" theme="light"><HomeScreen/></Phone>
+      <Phone label="02 · Leitura de estoque" theme="light"><ScanScreen/></Phone>
+      <Phone label="03 · Home (dark theme)" theme="dark"><HomeScreen/></Phone>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body></html>

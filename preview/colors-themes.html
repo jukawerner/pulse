@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pane { padding: 16px; border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 10px; }
+  .pane.light { background: #F8F9FB; color: #161A24; border: 1px solid #E5E8EF; }
+  .pane.dark { background: #0B1426; color: #ECEFF6; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; }
+  .name { font-family: var(--font-display); font-weight: 700; font-size: 14px; }
+  .tag { font-size: 10px; font-family: var(--font-mono); opacity: 0.6; }
+  .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+  .sw { aspect-ratio: 1; border-radius: 6px; display: flex; align-items: flex-end; padding: 4px; font-size: 9px; font-family: var(--font-mono); }
+  .pane.light .sw { border: 1px solid rgba(0,0,0,0.04); }
+</style></head>
+<body>
+  <div class="pane light">
+    <div class="head"><span class="name">Light theme</span><span class="tag">data-theme="light"</span></div>
+    <div class="swatches">
+      <div class="sw" style="background:#F8F9FB; color:#565E70">app</div>
+      <div class="sw" style="background:#FFFFFF; color:#565E70; border:1px solid #E5E8EF">surf</div>
+      <div class="sw" style="background:#F1F3F7; color:#565E70">surf2</div>
+      <div class="sw" style="background:#C8102E; color:#fff">brand</div>
+      <div class="sw" style="background:#1B2A4E; color:#fff">2nd</div>
+      <div class="sw" style="background:#161A24; color:#fff">fg</div>
+    </div>
+  </div>
+  <div class="pane dark">
+    <div class="head"><span class="name">Dark theme</span><span class="tag">data-theme="dark"</span></div>
+    <div class="swatches">
+      <div class="sw" style="background:#060B17; color:#A8B0BF">app</div>
+      <div class="sw" style="background:#0B1426; color:#A8B0BF">surf</div>
+      <div class="sw" style="background:#111A30; color:#A8B0BF">surf2</div>
+      <div class="sw" style="background:#E63946; color:#fff">brand</div>
+      <div class="sw" style="background:#5E73A0; color:#fff">2nd</div>
+      <div class="sw" style="background:#ECEFF6; color:#161A24">fg</div>
+    </div>
+  </div>
+</body></html>

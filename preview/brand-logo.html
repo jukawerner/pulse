@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); }
+  .row { display: flex; align-items: center; gap: 28px; }
+  .mark {
+    width: 96px; height: 96px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    display: grid; place-items: center;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  .mark img { width: 76%; height: 76%; object-fit: contain; }
+  .mark.dark { background: var(--navy-900); }
+  .info { display: flex; flex-direction: column; gap: 6px; }
+  .word {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 44px;
+    letter-spacing: -0.03em;
+    background: var(--grad-pulse);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+  .slogan {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--fg-muted);
+    letter-spacing: 0.01em;
+  }
+  .meta {
+    margin-top: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--brand-primary);
+    font-weight: 700;
+  }
+</style></head>
+<body>
+  <div class="row">
+    <div class="mark"><img src="../assets/pulse-symbol.png" alt="Pulse"></div>
+    <div class="mark dark"><img src="../assets/pulse-symbol.png" alt="Pulse"></div>
+    <div class="info">
+      <div class="word">PULSE</div>
+      <div class="slogan">a realidade da operação</div>
+      <div class="meta">Space Grotesk · 800 · −0.03em</div>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../pulse/pulse"
+		},
+		{
+			"path": "ui_kits"
+		},
+		{
+			"path": "uploads"
+		},
+		{
+			"path": "assets"
+		},
+		{
+			"path": "preview"
+		}
+	],
+	"settings": {}
+}

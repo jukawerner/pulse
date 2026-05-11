@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .panel {
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 130px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .grad   { background: var(--grad-pulse); }
+  .grad-soft {
+    background: var(--grad-pulse-soft);
+    color: var(--fg-default);
+    border: 1px solid var(--border-subtle);
+  }
+  .pulse-line {
+    position: absolute;
+    bottom: 18px; left: 20px; right: 20px;
+    opacity: 0.4;
+  }
+  .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; opacity: 0.85; }
+  .title { font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; }
+  .grad-soft .label { color: var(--brand-primary); opacity: 1; }
+</style></head>
+<body>
+  <div class="panel grad">
+    <div class="label">Signature gradient</div>
+    <div class="title">Pulse Hero</div>
+    <svg class="pulse-line" height="32" viewBox="0 0 280 32" fill="none" preserveAspectRatio="none">
+      <path d="M0 16 L60 16 L75 6 L90 26 L105 2 L120 30 L135 12 L155 16 L280 16" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+  </div>
+  <div class="panel grad-soft">
+    <div class="label">Gradient · soft</div>
+    <div class="title" style="color: var(--fg-default);">Background accent</div>
+  </div>
+</body></html>

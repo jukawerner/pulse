@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .badge.live { background: #FFE0E2; color: #9F1424; }
+  .badge.live .dot { background: #C8102E; animation: blink 1.4s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .badge.ok { background: #D8F5E5; color: #0A6940; }
+  .badge.warn { background: #FEF1CD; color: #B45309; }
+  .badge.info { background: #DBE9FF; color: #114BA8; }
+  .badge.neutral { background: #F1F3F7; color: #565E70; }
+  .badge.solid { background: #1B2A4E; color: white; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .pill.active { background: var(--brand-primary); border-color: var(--brand-primary); color: white; }
+  .pill-x { color: var(--fg-subtle); font-size: 14px; line-height: 1; cursor: pointer; }
+</style></head>
+<body>
+  <div class="row">
+    <span class="badge live"><span class="dot"></span>Ao vivo</span>
+    <span class="badge ok"><span class="dot"></span>Estoque OK</span>
+    <span class="badge warn"><span class="dot"></span>Atenção</span>
+    <span class="badge info"><span class="dot"></span>Em rota</span>
+    <span class="badge neutral">Rascunho</span>
+    <span class="badge solid">Premium</span>
+  </div>
+  <div class="row">
+    <span class="pill active">Hoje</span>
+    <span class="pill">7 dias</span>
+    <span class="pill">30 dias</span>
+    <span class="pill">Custom</span>
+    <span class="pill">São Paulo <span class="pill-x">×</span></span>
+    <span class="pill">Carrefour <span class="pill-x">×</span></span>
+  </div>
+</body></html>

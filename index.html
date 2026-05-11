@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulse · Design System</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+<style>
+  body { background: var(--bg-app); min-height: 100vh; }
+
+  /* ---- Header ---- */
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 64px;
+    background: rgba(6, 11, 23, 0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand-mark {
+    width: 34px; height: 34px;
+    background: var(--grad-pulse);
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 17px;
+    color: white; letter-spacing: -0.02em; flex-shrink: 0;
+  }
+  .brand-name {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 18px; letter-spacing: -0.03em; color: var(--fg-default);
+  }
+  .pill {
+    padding: 4px 10px; border-radius: var(--radius-pill);
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  }
+  .pill-red {
+    background: var(--brand-primary-soft); color: var(--brand-primary);
+    border: 1px solid rgba(230, 57, 70, 0.2);
+  }
+  .pill-navy {
+    background: var(--brand-secondary-soft); color: var(--brand-secondary);
+    border: 1px solid rgba(94, 115, 160, 0.2);
+  }
+  .header-pills { display: flex; gap: 8px; }
+
+  /* ---- Hero ---- */
+  .hero {
+    padding: 88px 64px 72px;
+    max-width: 1200px; margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 380px;
+    background: radial-gradient(ellipse at center top, rgba(200, 16, 46, 0.1) 0%, transparent 68%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-family: var(--font-sans); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brand-primary); margin: 0 0 16px;
+  }
+  .hero-title {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 72px; line-height: 0.95; letter-spacing: -0.04em;
+    color: var(--fg-default); margin: 0 0 22px;
+  }
+  .hero-title span {
+    background: var(--grad-pulse);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-lead { font-size: 17px; line-height: 1.6; color: var(--fg-muted); max-width: 540px; margin: 0; }
+
+  /* ---- Main container ---- */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 64px 96px; }
+
+  /* ---- Section ---- */
+  .section { margin-bottom: 64px; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 20px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .section-title {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 20px; letter-spacing: -0.02em; color: var(--fg-default);
+  }
+  .section-count { font-family: var(--font-mono); font-size: 12px; color: var(--fg-subtle); }
+
+  /* ---- Grids ---- */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(188px, 1fr)); gap: 10px; }
+
+  /* ---- Base card ---- */
+  .card {
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 24px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    text-decoration: none; color: inherit;
+    transition: border-color var(--dur-base) var(--ease-out),
+                transform var(--dur-base) var(--ease-out),
+                box-shadow var(--dur-base) var(--ease-out);
+  }
+  .card:hover {
+    border-color: var(--border-default);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .card-large { padding: 32px; }
+
+  /* card icon */
+  .ci {
+    width: 40px; height: 40px; border-radius: var(--radius-md); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ci-sm { width: 30px; height: 30px; border-radius: var(--radius-sm); }
+  .ci-red   { background: var(--brand-primary-soft);   color: var(--brand-primary); }
+  .ci-navy  { background: var(--brand-secondary-soft); color: var(--brand-secondary); }
+  .ci-green { background: rgba(45,206,133,0.14);       color: #2DCE85; }
+  .ci-muted { background: var(--bg-surface-2);         color: var(--fg-muted); }
+  .ci-grad  { background: var(--grad-pulse); }
+
+  .card-eyebrow {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-subtle);
+    margin: 0;
+  }
+  .card-title {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 18px; letter-spacing: -0.02em; color: var(--fg-default); margin: 0;
+  }
+  .card-desc { font-size: 13px; line-height: 1.55; color: var(--fg-muted); margin: 0; }
+  .card-cta {
+    margin-top: auto; display: flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600;
+  }
+  .card-cta-red   { color: var(--brand-primary); }
+  .card-cta-navy  { color: var(--brand-secondary); }
+  .card-cta-green { color: #2DCE85; }
+  .card-cta i { transition: transform var(--dur-fast) var(--ease-out); }
+  .card:hover .card-cta i { transform: translateX(3px); }
+
+  /* ---- Token cards (small row layout) ---- */
+  .card-token {
+    flex-direction: row; align-items: center; gap: 12px;
+    padding: 14px 16px; border-radius: var(--radius-lg);
+  }
+  .card-token-title {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 13px; letter-spacing: -0.01em; color: var(--fg-default);
+  }
+
+  /* ---- Token group ---- */
+  .token-group { margin-bottom: 28px; }
+  .token-group-label {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fg-subtle); margin: 0 0 10px;
+  }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align: center; padding: 28px 64px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 12px; color: var(--fg-subtle);
+    font-family: var(--font-mono); letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════ HEADER ════════════════════════════════ -->
+<header class="header">
+  <a class="brand" href="#">
+    <div class="brand-mark">P</div>
+    <span class="brand-name">Pulse</span>
+  </a>
+  <div class="header-pills">
+    <span class="pill pill-red">v1.0</span>
+    <span class="pill pill-navy">Design System</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════ HERO ════════════════════════════════ -->
+<section class="hero">
+  <p class="eyebrow">Trade Marketing Operations Platform</p>
+  <h1 class="hero-title"><span>Pulse</span> Design System</h1>
+  <p class="hero-lead">Brand, UI kits e tokens de design para o produto Pulse. Navegue pelos recursos abaixo.</p>
+</section>
+
+<!-- ════════════════════════════════ MAIN ════════════════════════════════ -->
+<main class="container">
+
+  <!-- ── Brand Identity ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Brand Identity</span>
+      <span class="section-count">2 documentos</span>
+    </div>
+    <div class="grid-2">
+
+      <a href="brand-book.html" class="card card-large">
+        <div class="ci ci-red">
+          <i data-lucide="book-open" width="20" height="20"></i>
+        </div>
+        <p class="card-eyebrow">Identidade Visual</p>
+        <h3 class="card-title">Brand Book</h3>
+        <p class="card-desc">Documentação completa da identidade visual — logo, paleta, tipografia, voz e princípios de design.</p>
+        <div class="card-cta card-cta-red">Abrir Brand Book <i data-lucide="arrow-right" width="14" height="14"></i></div>
+      </a>
+
+      <a href="brand-book-deck.html" class="card card-large">
+        <div class="ci ci-navy">
+          <i data-lucide="presentation" width="20" height="20"></i>
+        </div>
+        <p class="card-eyebrow">Apresentação</p>
+        <h3 class="card-title">Brand Deck</h3>
+        <p class="card-desc">Versão deck interativo do brand book, formatado para apresentações e alinhamentos de equipe.</p>
+        <div class="card-cta card-cta-navy">Abrir Deck <i data-lucide="arrow-right" width="14" height="14"></i></div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── UI Kits ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">UI Kits</span>
+      <span class="section-count">3 interfaces</span>
+    </div>
+    <div class="grid-3">
+
+      <a href="ui_kits/web/index.html" class="card">
+        <div class="ci ci-red">
+          <i data-lucide="monitor" width="20" height="20"></i>
+        </div>
+        <p class="card-eyebrow">Web App</p>
+        <h3 class="card-title">Dashboard</h3>
+        <p class="card-desc">Interface principal — sidebar, métricas, tabelas e navegação da plataforma.</p>
+        <div class="card-cta card-cta-red">Ver interface <i data-lucide="arrow-right" width="14" height="14"></i></div>
+      </a>
+
+      <a href="ui_kits/mobile/index.html" class="card">
+        <div class="ci ci-navy">
+          <i data-lucide="smartphone" width="20" height="20"></i>
+        </div>
+        <p class="card-eyebrow">Mobile App</p>
+        <h3 class="card-title">App iOS / Android</h3>
+        <p class="card-desc">Telas mobile com simulação de device para visualização fiel dos fluxos.</p>
+        <div class="card-cta card-cta-navy">Ver interface <i data-lucide="arrow-right" width="14" height="14"></i></div>
+      </a>
+
+      <a href="ui_kits/landing/index.html" class="card">
+        <div class="ci ci-green">
+          <i data-lucide="layout" width="20" height="20"></i>
+        </div>
+        <p class="card-eyebrow">Marketing</p>
+        <h3 class="card-title">Landing Page</h3>
+        <p class="card-desc">Página institucional com hero, features e CTA otimizado para conversão.</p>
+        <div class="card-cta card-cta-green">Ver interface <i data-lucide="arrow-right" width="14" height="14"></i></div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Design Tokens ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Design Tokens &amp; Previews</span>
+      <span class="section-count">21 amostras</span>
+    </div>
+
+    <!-- Brand -->
+    <div class="token-group">
+      <p class="token-group-label">Brand</p>
+      <div class="grid-auto">
+        <a href="preview/brand-logo.html" class="card card-token">
+          <div class="ci ci-sm ci-red"><i data-lucide="zap" width="14" height="14"></i></div>
+          <span class="card-token-title">Logo System</span>
+        </a>
+        <a href="preview/brand-gradient.html" class="card card-token">
+          <div class="ci ci-sm ci-grad"></div>
+          <span class="card-token-title">Gradient</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Colors -->
+    <div class="token-group">
+      <p class="token-group-label">Colors</p>
+      <div class="grid-auto">
+        <a href="preview/colors-chart.html" class="card card-token">
+          <div class="ci ci-sm ci-green"><i data-lucide="bar-chart-2" width="14" height="14"></i></div>
+          <span class="card-token-title">Chart</span>
+        </a>
+        <a href="preview/colors-navy.html" class="card card-token">
+          <div class="ci ci-sm" style="background:var(--navy-700)"></div>
+          <span class="card-token-title">Navy Scale</span>
+        </a>
+        <a href="preview/colors-red.html" class="card card-token">
+          <div class="ci ci-sm" style="background:var(--red-600)"></div>
+          <span class="card-token-title">Red Scale</span>
+        </a>
+        <a href="preview/colors-slate.html" class="card card-token">
+          <div class="ci ci-sm" style="background:var(--slate-600)"></div>
+          <span class="card-token-title">Slate Scale</span>
+        </a>
+        <a href="preview/colors-status.html" class="card card-token">
+          <div class="ci ci-sm ci-green"><i data-lucide="check-circle-2" width="14" height="14"></i></div>
+          <span class="card-token-title">Status</span>
+        </a>
+        <a href="preview/colors-themes.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="sun-moon" width="14" height="14"></i></div>
+          <span class="card-token-title">Themes</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="token-group">
+      <p class="token-group-label">Components</p>
+      <div class="grid-auto">
+        <a href="preview/components-avatars.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="user-circle-2" width="14" height="14"></i></div>
+          <span class="card-token-title">Avatars</span>
+        </a>
+        <a href="preview/components-badges.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="tag" width="14" height="14"></i></div>
+          <span class="card-token-title">Badges</span>
+        </a>
+        <a href="preview/components-buttons.html" class="card card-token">
+          <div class="ci ci-sm ci-red"><i data-lucide="mouse-pointer-2" width="14" height="14"></i></div>
+          <span class="card-token-title">Buttons</span>
+        </a>
+        <a href="preview/components-cards.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="layout-panel-left" width="14" height="14"></i></div>
+          <span class="card-token-title">Cards</span>
+        </a>
+        <a href="preview/components-inputs.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="text-cursor-input" width="14" height="14"></i></div>
+          <span class="card-token-title">Inputs</span>
+        </a>
+        <a href="preview/components-nav.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="navigation" width="14" height="14"></i></div>
+          <span class="card-token-title">Navigation</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Spacing -->
+    <div class="token-group">
+      <p class="token-group-label">Spacing &amp; Layout</p>
+      <div class="grid-auto">
+        <a href="preview/spacing-radii.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="circle-dashed" width="14" height="14"></i></div>
+          <span class="card-token-title">Radii</span>
+        </a>
+        <a href="preview/spacing-scale.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="ruler" width="14" height="14"></i></div>
+          <span class="card-token-title">Scale</span>
+        </a>
+        <a href="preview/spacing-shadows.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="layers" width="14" height="14"></i></div>
+          <span class="card-token-title">Shadows</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="token-group">
+      <p class="token-group-label">Typography</p>
+      <div class="grid-auto">
+        <a href="preview/type-body.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="align-left" width="14" height="14"></i></div>
+          <span class="card-token-title">Body</span>
+        </a>
+        <a href="preview/type-families.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="type" width="14" height="14"></i></div>
+          <span class="card-token-title">Families</span>
+        </a>
+        <a href="preview/type-headings.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="heading-1" width="14" height="14"></i></div>
+          <span class="card-token-title">Headings</span>
+        </a>
+        <a href="preview/type-metric.html" class="card card-token">
+          <div class="ci ci-sm ci-muted"><i data-lucide="hash" width="14" height="14"></i></div>
+          <span class="card-token-title">Metric</span>
+        </a>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<!-- ════════════════════════════════ FOOTER ════════════════════════════════ -->
+<footer class="footer">
+  Pulse Design System &nbsp;·&nbsp; Trade Marketing Operations &nbsp;·&nbsp; 2025
+</footer>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

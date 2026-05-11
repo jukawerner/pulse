@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .label { font-size: 11px; font-weight: 600; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .metric { font-family: var(--font-display); font-weight: 700; font-size: 42px; letter-spacing: -0.025em; line-height: 1; font-variant-numeric: tabular-nums; color: var(--fg-default); }
+  .unit { font-family: var(--font-sans); font-size: 16px; font-weight: 600; color: var(--fg-muted); margin-left: 4px; }
+  .delta { font-family: var(--font-mono); font-size: 12px; font-weight: 500; }
+  .up { color: #0E8A55; }
+  .down { color: #C8102E; }
+</style></head>
+<body>
+  <div class="card">
+    <span class="label">Sell-out semana</span>
+    <span class="metric">R$ 248<span class="unit">k</span></span>
+    <span class="delta up">↑ 12.4% vs semana anterior</span>
+  </div>
+  <div class="card">
+    <span class="label">Visitas hoje</span>
+    <span class="metric">142<span class="unit">/ 168</span></span>
+    <span class="delta up">84.5% de aderência</span>
+  </div>
+  <div class="card">
+    <span class="label">Rupturas ativas</span>
+    <span class="metric" style="color:#C8102E">23</span>
+    <span class="delta down">↑ 4 desde ontem</span>
+  </div>
+</body></html>

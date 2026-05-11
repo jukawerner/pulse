@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 24px; background: var(--bg-app); display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+  .fam { display: flex; flex-direction: column; gap: 8px; }
+  .sample { font-size: 38px; line-height: 1; letter-spacing: -0.02em; color: var(--fg-default); }
+  .tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; color: var(--brand-primary); }
+  .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); }
+  .display { font-family: var(--font-display); font-weight: 700; }
+  .body { font-family: var(--font-sans); font-weight: 600; }
+  .mono { font-family: var(--font-mono); font-weight: 500; font-size: 24px; }
+</style></head>
+<body>
+  <div class="fam">
+    <span class="tag">Display</span>
+    <span class="sample display">Aa Pulse 2026</span>
+    <span class="meta">Space Grotesk · 500–700</span>
+  </div>
+  <div class="fam">
+    <span class="tag">UI · Body</span>
+    <span class="sample body">Aa Operação</span>
+    <span class="meta">Manrope · 400–800</span>
+  </div>
+  <div class="fam" style="grid-column: 1 / -1;">
+    <span class="tag">Mono · Dados</span>
+    <span class="sample mono">SKU-7842 · R$ 12.480,90 · 98.3%</span>
+    <span class="meta">JetBrains Mono · 400–500 · tabular-nums</span>
+  </div>
+</body></html>

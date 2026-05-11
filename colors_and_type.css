@@ -1,0 +1,391 @@
+/* ============================================================
+   PULSE DESIGN SYSTEM — Colors & Typography
+   ============================================================
+   Trade marketing operations platform.
+   "A realidade da operação"
+
+   Theming model:
+   - :root holds primitive scales + light-theme semantic tokens
+   - [data-theme="dark"] re-maps semantic tokens for dark mode
+   - Components ONLY consume semantic tokens (--bg-*, --fg-*, --border-*, etc.)
+   ============================================================ */
+
+/* ---------- 1. Fonts ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ============================================================
+   2. PRIMITIVE SCALES (never use directly in components)
+   ============================================================ */
+:root {
+  /* Brand — Pulse Red (from logo) */
+  --red-50:  #FFF1F2;
+  --red-100: #FFE0E2;
+  --red-200: #FFC2C7;
+  --red-300: #FF939B;
+  --red-400: #F75A66;
+  --red-500: #E63946;  /* Brand primary */
+  --red-600: #C8102E;  /* Logo solid red */
+  --red-700: #9F1424;
+  --red-800: #7A1220;
+  --red-900: #54101A;
+
+  /* Brand — Pulse Navy (from logo) */
+  --navy-50:  #F2F4F9;
+  --navy-100: #E2E7F1;
+  --navy-200: #C2CCDF;
+  --navy-300: #94A3C2;
+  --navy-400: #5E73A0;
+  --navy-500: #3B5187;
+  --navy-600: #243C6C;
+  --navy-700: #1B2A4E;  /* Logo navy */
+  --navy-800: #131F3A;
+  --navy-900: #0B1426;
+  --navy-950: #060B17;
+
+  /* Neutrals — warm-cool balanced */
+  --slate-0:   #FFFFFF;
+  --slate-50:  #F8F9FB;
+  --slate-100: #F1F3F7;
+  --slate-200: #E5E8EF;
+  --slate-300: #D2D7E1;
+  --slate-400: #A8B0BF;
+  --slate-500: #7B8497;
+  --slate-600: #565E70;
+  --slate-700: #3B4253;
+  --slate-800: #242937;
+  --slate-900: #161A24;
+  --slate-950: #0B0E16;
+
+  /* Semantic primitives */
+  --green-100: #D8F5E5;
+  --green-500: #16A66B;
+  --green-600: #0E8A55;
+  --green-700: #0A6940;
+
+  --amber-100: #FEF1CD;
+  --amber-500: #F59E0B;
+  --amber-600: #D97706;
+  --amber-700: #B45309;
+
+  --rose-100: #FFE0E2;
+  --rose-500: #E63946;
+  --rose-600: #C8102E;
+  --rose-700: #9F1424;
+
+  --blue-100: #DBE9FF;
+  --blue-500: #2D7FF9;
+  --blue-600: #1865D8;
+  --blue-700: #114BA8;
+}
+
+/* ============================================================
+   3. SEMANTIC TOKENS — LIGHT (default)
+   ============================================================ */
+:root,
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-app:        var(--slate-50);     /* page background */
+  --bg-surface:    var(--slate-0);      /* cards, panels */
+  --bg-surface-2:  var(--slate-100);    /* nested surface, hover bg */
+  --bg-surface-3:  var(--slate-200);    /* darker subdivision */
+  --bg-inverse:    var(--navy-800);
+  --bg-overlay:    rgba(11, 20, 38, 0.55);
+
+  /* Foregrounds */
+  --fg-default:    var(--slate-900);
+  --fg-muted:      var(--slate-600);
+  --fg-subtle:     var(--slate-500);
+  --fg-disabled:   var(--slate-400);
+  --fg-inverse:    var(--slate-0);
+  --fg-on-brand:   var(--slate-0);
+
+  /* Borders */
+  --border-subtle:  var(--slate-200);
+  --border-default: var(--slate-300);
+  --border-strong:  var(--slate-400);
+  --border-focus:   var(--red-500);
+
+  /* Brand */
+  --brand-primary:        var(--red-600);
+  --brand-primary-hover:  var(--red-700);
+  --brand-primary-active: var(--red-800);
+  --brand-primary-soft:   var(--red-50);
+  --brand-primary-fg:     var(--slate-0);
+
+  --brand-secondary:        var(--navy-700);
+  --brand-secondary-hover:  var(--navy-800);
+  --brand-secondary-active: var(--navy-900);
+  --brand-secondary-soft:   var(--navy-50);
+  --brand-secondary-fg:     var(--slate-0);
+
+  /* Status */
+  --status-success:      var(--green-600);
+  --status-success-soft: var(--green-100);
+  --status-success-fg:   var(--green-700);
+
+  --status-warning:      var(--amber-600);
+  --status-warning-soft: var(--amber-100);
+  --status-warning-fg:   var(--amber-700);
+
+  --status-danger:       var(--rose-600);
+  --status-danger-soft:  var(--rose-100);
+  --status-danger-fg:    var(--rose-700);
+
+  --status-info:         var(--blue-600);
+  --status-info-soft:    var(--blue-100);
+  --status-info-fg:      var(--blue-700);
+
+  /* Signature gradient (red → navy, from the logo) */
+  --grad-pulse: linear-gradient(135deg, var(--red-600) 0%, var(--red-700) 35%, var(--navy-700) 100%);
+  --grad-pulse-soft: linear-gradient(135deg, var(--red-50) 0%, var(--navy-50) 100%);
+
+  /* Shadows — soft, modern */
+  --shadow-xs: 0 1px 2px rgba(11, 20, 38, 0.05);
+  --shadow-sm: 0 1px 3px rgba(11, 20, 38, 0.08), 0 1px 2px rgba(11, 20, 38, 0.04);
+  --shadow-md: 0 4px 12px -2px rgba(11, 20, 38, 0.08), 0 2px 4px -2px rgba(11, 20, 38, 0.04);
+  --shadow-lg: 0 12px 28px -6px rgba(11, 20, 38, 0.12), 0 4px 10px -4px rgba(11, 20, 38, 0.05);
+  --shadow-xl: 0 24px 48px -12px rgba(11, 20, 38, 0.18);
+  --shadow-focus: 0 0 0 3px rgba(230, 57, 70, 0.25);
+
+  /* Chart palette (categorical, accessible) */
+  --chart-1: var(--red-600);
+  --chart-2: var(--navy-700);
+  --chart-3: var(--amber-500);
+  --chart-4: var(--green-500);
+  --chart-5: var(--blue-500);
+  --chart-6: var(--navy-400);
+  --chart-7: var(--red-400);
+  --chart-8: var(--slate-500);
+}
+
+/* ============================================================
+   4. SEMANTIC TOKENS — DARK
+   ============================================================ */
+[data-theme="dark"] {
+  /* Backgrounds — deep navy-tinged blacks, never pure black */
+  --bg-app:        var(--navy-950);
+  --bg-surface:    var(--navy-900);
+  --bg-surface-2:  #111A30;
+  --bg-surface-3:  #1A2540;
+  --bg-inverse:    var(--slate-50);
+  --bg-overlay:    rgba(0, 0, 0, 0.65);
+
+  --fg-default:    #ECEFF6;
+  --fg-muted:      #A8B0BF;
+  --fg-subtle:     #7B8497;
+  --fg-disabled:   #4A5263;
+  --fg-inverse:    var(--slate-900);
+  --fg-on-brand:   #FFFFFF;
+
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.18);
+  --border-focus:   var(--red-400);
+
+  --brand-primary:        var(--red-500);
+  --brand-primary-hover:  var(--red-400);
+  --brand-primary-active: var(--red-300);
+  --brand-primary-soft:   rgba(230, 57, 70, 0.14);
+  --brand-primary-fg:     #FFFFFF;
+
+  --brand-secondary:        var(--navy-400);
+  --brand-secondary-hover:  var(--navy-300);
+  --brand-secondary-active: var(--navy-200);
+  --brand-secondary-soft:   rgba(94, 115, 160, 0.18);
+  --brand-secondary-fg:     var(--navy-950);
+
+  --status-success:      #2DCE85;
+  --status-success-soft: rgba(45, 206, 133, 0.14);
+  --status-success-fg:   #79E5AC;
+
+  --status-warning:      #F5B547;
+  --status-warning-soft: rgba(245, 181, 71, 0.14);
+  --status-warning-fg:   #FFD27D;
+
+  --status-danger:       var(--red-400);
+  --status-danger-soft:  rgba(247, 90, 102, 0.16);
+  --status-danger-fg:    #FF9BA3;
+
+  --status-info:         #5FA3FF;
+  --status-info-soft:    rgba(95, 163, 255, 0.14);
+  --status-info-fg:      #9CC4FF;
+
+  --grad-pulse: linear-gradient(135deg, var(--red-500) 0%, var(--red-700) 40%, var(--navy-800) 100%);
+  --grad-pulse-soft: linear-gradient(135deg, rgba(230, 57, 70, 0.18) 0%, rgba(27, 42, 78, 0.45) 100%);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 14px -2px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 16px 32px -8px rgba(0, 0, 0, 0.65);
+  --shadow-xl: 0 32px 56px -16px rgba(0, 0, 0, 0.75);
+  --shadow-focus: 0 0 0 3px rgba(247, 90, 102, 0.4);
+
+  --chart-1: #F75A66;
+  --chart-2: #94A3C2;
+  --chart-3: #F5B547;
+  --chart-4: #2DCE85;
+  --chart-5: #5FA3FF;
+  --chart-6: #5E73A0;
+  --chart-7: #FFC2C7;
+  --chart-8: #A8B0BF;
+}
+
+/* ============================================================
+   5. TYPOGRAPHY
+   ============================================================ */
+:root {
+  --font-sans:    "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Manrope", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale (1.200 ratio, modular) */
+  --text-2xs: 0.6875rem;  /* 11px */
+  --text-xs:  0.75rem;    /* 12px */
+  --text-sm:  0.8125rem;  /* 13px */
+  --text-md:  0.9375rem;  /* 15px — body default */
+  --text-lg:  1.0625rem;  /* 17px */
+  --text-xl:  1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.375rem;   /* 38px */
+  --text-5xl: 3rem;       /* 48px */
+  --text-6xl: 3.75rem;    /* 60px */
+  --text-7xl: 4.75rem;    /* 76px */
+
+  --leading-tight: 1.15;
+  --leading-snug:  1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight: -0.02em;
+  --tracking-snug:  -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-widest: 0.14em;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold: 600;
+  --weight-bold:    700;
+  --weight-extrabold: 800;
+}
+
+/* ============================================================
+   6. SPACING, RADII, MOTION
+   ============================================================ */
+:root {
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-pill: 999px;
+
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:    140ms;
+  --dur-base:    220ms;
+  --dur-slow:    360ms;
+}
+
+/* ============================================================
+   7. SEMANTIC TEXT STYLES — drop-in classes
+   ============================================================ */
+.t-display-xl,
+.t-display-lg,
+.t-display-md,
+.t-h1, .t-h2, .t-h3, .t-h4,
+.t-eyebrow {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-default);
+}
+
+.t-display-xl { font-size: var(--text-7xl); line-height: 0.95; font-weight: var(--weight-extrabold); }
+.t-display-lg { font-size: var(--text-6xl); line-height: 1.0;  font-weight: var(--weight-bold); }
+.t-display-md { font-size: var(--text-5xl); line-height: 1.05; }
+.t-h1 { font-size: var(--text-4xl); line-height: var(--leading-tight); }
+.t-h2 { font-size: var(--text-3xl); line-height: var(--leading-tight); }
+.t-h3 { font-size: var(--text-2xl); line-height: var(--leading-snug); }
+.t-h4 { font-size: var(--text-xl);  line-height: var(--leading-snug); font-weight: var(--weight-semibold); }
+
+.t-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
+.t-body-lg,
+.t-body,
+.t-body-sm,
+.t-caption,
+.t-label,
+.t-mono {
+  font-family: var(--font-sans);
+  color: var(--fg-default);
+}
+
+.t-body-lg { font-size: var(--text-lg); line-height: var(--leading-normal); }
+.t-body    { font-size: var(--text-md); line-height: var(--leading-normal); }
+.t-body-sm { font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--fg-muted); }
+.t-caption { font-size: var(--text-xs); line-height: var(--leading-snug); color: var(--fg-subtle); }
+
+.t-label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.t-metric {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-default);
+}
+
+/* ============================================================
+   8. RESETS / BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--fg-default);
+  background: var(--bg-app);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
